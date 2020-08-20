@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+ <span class="navbar-brand mx-5 mb-0 font-weight-bold font-italic">
+ Django</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-warning" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-warning"
+                   href="{% url 'bookmark:index' %}"><i class="far fa-bookmark"></i> Bookmark</a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-warning"
+                   href="{% url 'blog:index' %}"><i class="fas fa-blog"></i> Blog</a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-warning" href=""><i class="far fa-image"></i> Photo</a></li>
+            <li class="nav-item dropdown mx-1 btn btn-light">
+                <a class="nav-link dropdown-toggle text-warning" href="#"
+                   data-toggle="dropdown"><i class="fas fa-user-cog"></i> Util</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-warning" href="{% url 'admin:index' %}">Admin</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-warning" href="{% url 'blog:post_archive' %}">Archive</a>
+                    <a class="dropdown-item text-warning" href="{% url 'blog:search' %}">Search</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2" action="" method="post"> {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search"
+                   placeholder="global search" name="search_word">
+        </form>
+        <ul class="navbar-nav ml-5 mr-5">
+            <li class="nav-item dropdown mx-1 btn btn-light">
+                {% if user.is_active %}
+                <a class="nav-link dropdown-toggle text-warning" href="#"
+                   data-toggle="dropdown">
+                    <i class="fas fa-user"></i>
+                    {{user.username }} </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-warning"  href="{% url 'logout' %}">Logout</a>
+                    <a class="dropdown-item text-warning" href="{% url 'password_change' %}">
+                        Change Password</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle text-warning" href="#"
+                   data-toggle="dropdown">
+                    <i class="fas fa-user text-warning"></i> Anonymous</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-warning" href="{% url 'login' %}">Login</a>
+                    <a class="dropdown-item text-warning" href="{% url 'register' %}">Register</a>
+                </div>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
